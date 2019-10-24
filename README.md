@@ -37,6 +37,12 @@ A direct comparison is drawn between the n-grams and the emojis by vectorizing t
 ### Summary Scoring
 We score a summary by averaging the cosine difference of all n-gram-emoji combinations. The lower the average difference the higher the score. 
 
+### Ideas for Improvement
+[ ] Use Emoji2Vec-Sent2Vec Vectoriztion instead of naive list
+[x] Remove n-gram sequences that contain n-grams with only stop words
+[ ] Modify scoring algorithm to weight based on n-gram length
+[ ] 
+
 ## Some Results
 | Input Sentence                          |   Summary Score | Individual N-Gram Scores   | N-Grams                                        |   Elapsed Time | Emoji Results   |
 |:----------------------------------------|----------------:|:---------------------------|:-----------------------------------------------|---------------:|:----------------|

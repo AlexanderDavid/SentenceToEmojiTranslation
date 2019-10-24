@@ -364,3 +364,14 @@ Completed emoji embeddings, time elapsed: 1.4212706089019775
 | Tom got a small piece of pie.           |           0.751 | [0.268, 1.0, 0.985]        | ['tom got', 'small', 'piec pie']         |        4.96969 | 💆🚼🍏          |
 | The lake is a long way from here.       |           0.714 | [0.482, 0.946]             | ['lake long', 'way']                     |        1.99059 | 🚤🌌            |
 | Rock music approaches at high velocity. |           0.905 | [1.0, 1.0, 0.714]          | ['rock', 'music', 'approach high veloc'] |        5.00762 | 🤘🎻🎩          |
+
+# Removing n-grams that contain unigrams with a stop word
+## Combined Dataset w/ Removed n-grams
+| Input Sentence                          |   Summary Score | Individual N-Gram Scores   | N-Grams                                        |   Elapsed Time | Emoji Results   |
+|:----------------------------------------|----------------:|:---------------------------|:-----------------------------------------------|---------------:|:----------------|
+| We need to rent a room for our party.   |           0.687 | [0.374, 1.0]               | ['we need to rent a room for our', 'party']    |       10.8195  | 🚪🎈            |
+| She folded her handkerchief neatly.     |           0.471 | [0.471]                    | ['she folded her handkerchief neatly']         |        3.02839 | 🙏              |
+| I'd rather be a bird than a fish.       |           0.753 | [0.507, 1.0]               | ["i 'd rather be a bird than a", 'fish']       |       10.5912  | 🐥♓            |
+| Tom got a small piece of pie.           |           0.758 | [0.332, 1.0, 0.741, 0.958] | ['tom got a', 'small', 'piece', 'of pie']      |        8.73315 | 💯🚼🎩🍏        |
+| The lake is a long way from here.       |           0.51  | [0.424, 0.591, 0.515]      | ['the lake is a', 'long', 'way from here']     |        4.05432 | 💯🤥🈁          |
+| Rock music approaches at high velocity. |           0.822 | [1.0, 1.0, 0.465]          | ['rock', 'music', 'approach at high velocity'] |        6.74701 | 🎸🎻🚄  
