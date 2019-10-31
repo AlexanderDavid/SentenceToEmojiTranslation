@@ -1,36 +1,35 @@
 # Standard library
-from typing import List, Tuple, Callable # Datatypes for the function typing
-from functools import lru_cache          # Function annotation for storing results 
-from dataclasses import dataclass, field # C-like struct functions and class annotation
-from string import punctuation           # Set of all punctuation
+from typing import List, Tuple, Callable  # Datatypes for the function typing
+from functools import lru_cache           # Annotation for storing func results
+from dataclasses import dataclass, field  # Struct functions and annotations
+from string import punctuation            # Set of all punctuation
 
 # Scipy suite
-import numpy as np                        # For function annotation
-from scipy.spatial.distance import cosine # Distance between sentence and emoji in sent2vec vector space
+import numpy as np                          # For function annotation
+from scipy.spatial.distance import cosine   # Distance between vectors
+import warnings                             # cosine distance gives warnings
+                                            # when div by 0 so ignore
 
-# NLTK 
-from nltk import word_tokenize              # Tokenizing a sentence into words and tagging POS
-from nltk.stem import WordNetLemmatizer         # Different stemming algorithms
-from nltk.corpus import stopwords           # Define the set of stopwords in english
-stopwords = set(stopwords.words('english'))
-
-# Import spacy (NLP)
-import spacy
+# NLTK
+from nltk import word_tokenize              # Tokenizing a sentence into words
+# from nltk.stem import WordNetLemmatizer     # Different stemming algorithms
+from nltk.corpus import stopwords           # Define the set of stopwords
 
 # Import sentence vectorizer
 import sent2vec
 
-# IPython output formatting
-from tabulate import tabulate                           # Tabulation from 2-d array into html table
-from IPython.display import display, HTML, clear_output # Nice displaying in the output cell
-import warnings; warnings.simplefilter('ignore')        # cosine distance gives warnings when div by 0 so
-                                                        # ignore all of these
+# Ignore simple warnings
+warnings.simplefilter('ignore')
+
+# Parse all the stop words
+stopwords = set(stopwords.words('english'))
+
 
 @dataclass
 class EmojiSummarizationResult:
     """
     "Struct" for keeping track of an Emoji Summarization result
-    
+
     Data Members:
         emojis(str): String of emojis that represent the summarization
         n_grams(List[str]): List of variable length n-grams that each emoji represents
@@ -45,7 +44,10 @@ class EmojiSummarizationResult:
 class ExhaustiveChunkingTranslation:
     def __init__(self, emoji_data_file: str, s2v_model_file: str, lemma_func: Callable[[str], str]):
         self.emoji_file = emoji_data_file
-        self.s2v = s2v.load_model(s2v_model_file)
+
+        sent2vec = sent2vec.Sent2vecModel()
+        self.s2v = sent2vec.load_model(s2v_model_file)
+
         self.lemma_func = lemma_func
         
     def clean_sentence(self, sent: str, lemma_func: Callable[[str], str]=None, keep_stop_words: bool=True) -> str:
