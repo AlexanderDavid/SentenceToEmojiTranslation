@@ -14,7 +14,7 @@ Click==7.0
 colorama==0.3.7
 configobj==5.0.6
 constantly==15.1.0
-cryptography==2.1.4
+cryptography==2.3
 cwiid==0.6.0
 cycler==0.10.0
 Cython==0.26.1
