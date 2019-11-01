@@ -5,8 +5,8 @@ from dataclasses import dataclass, field  # Struct functions and annotations
 from string import punctuation            # Set of all punctuation
 
 # Scipy suite
-import numpy as np                          # For function annotation
-from scipy.spatial.distance import cosine   # Distance between vectors
+import numpy as np         # For function annotation
+from utils import cosine   # Distance between vectors
 
 # NLTK
 from nltk import word_tokenize              # Tokenizing a sentence into words
@@ -48,6 +48,7 @@ class ExhaustiveChunkingTranslation:
         self.emoji_file = emoji_data_file
 
         self.s2v = sent2vec.Sent2vecModel()
+        print(s2v_model_file)
         self.s2v.load_model(s2v_model_file)
 
         self.lemma_func = lemma_func
@@ -326,3 +327,9 @@ class ExhaustiveChunkingTranslation:
         # Return the emoji "sentence", list of all the cosine similarities,
         # and all of the n-grams
         return best_summarization
+
+
+if __name__ == '__main__':
+    e = ExhaustiveChunkingTranslation("./data/emoji_joined.txt",
+                                      "./data/GoogleNews-vectors-negative300.bin", lambda x: x)
+    print(e.summarize("The dog bit me"))
