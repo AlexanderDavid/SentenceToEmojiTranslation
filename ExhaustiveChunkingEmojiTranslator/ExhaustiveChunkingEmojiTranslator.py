@@ -331,5 +331,6 @@ class ExhaustiveChunkingTranslation:
 
 if __name__ == '__main__':
     e = ExhaustiveChunkingTranslation("./data/emoji_joined.txt",
-                                      "./data/GoogleNews-vectors-negative300.bin", lambda x: x)
-    print(e.summarize("The dog bit me"))
+                                      "./data/wiki_unigrams.bin", lambda x: x)
+    while True:
+        print(e.summarize(input(">")))
