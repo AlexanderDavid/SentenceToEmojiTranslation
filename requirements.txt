@@ -74,7 +74,7 @@ python-snappy==0.5
 PyTrie==0.2
 pytz==2018.3
 pyxdg==0.25
-PyYAML==3.12
+PyYAML==5.1
 qrcode==5.3
 requests==2.18.4
 roman==2.0.0
