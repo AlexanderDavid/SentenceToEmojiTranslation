@@ -1,4 +1,4 @@
-# Naive Sentence to Emoji Translation
+# Sentence to Emoji Translation
 A naive chunking approach to summarizing a sentence to emoji translation using sent2vec and some of emoji2vec's dataset. This is a final senior research project for my undergraduate degree at Clarion University.
 
 ## Algorithm Explanation
@@ -40,8 +40,7 @@ We score a summary by averaging the cosine difference of all n-gram-emoji combin
 ### Ideas for Improvement
 [ ] Use Emoji2Vec-Sent2Vec Vectoriztion instead of naive list
 [x] Remove n-gram sequences that contain n-grams with only stop words
-[ ] Modify scoring algorithm to weight based on n-gram length
-[ ] 
+[x] Modify scoring algorithm to weight based on n-gram length 
 
 ## Some Results
 | Input Sentence                          |   Summary Score | Individual N-Gram Scores   | N-Grams                                        |   Elapsed Time | Emoji Results   |
