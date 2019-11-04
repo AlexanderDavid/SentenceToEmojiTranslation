@@ -24,22 +24,10 @@ warnings.simplefilter('ignore')
 stopwords = set(stopwords.words('english'))
 
 
-@dataclass
-class EmojiSummarizationResult:
-    """
-    "Struct" for keeping track of an Emoji Summarization result
 
-    Data Members:
-        emojis(str): String of emojis that represent the summarization
-        n_grams(List[str]): List of n-grams that represent the input sentence
-        uncertainty_scores(List[float]): List of the cosine distance
-                                         between each n_gram and emoji
-        time_elapsed(float): How long it took to complete the summary
-    """
-    emojis: str = ""
-    n_grams: List[str] = field(default_factory=list)
-    uncertainty_scores: List[float] = field(default_factory=list)
-    elapsed_time: float = 0
+
+
+class
 
 
 class ExhaustiveChunkingTranslation:
@@ -83,7 +71,8 @@ class ExhaustiveChunkingTranslation:
 
     def generate_emoji_embeddings(self, lemma_func: Callable[[str], str]=None,
                                   keep_stop_words:
-                                  bool=True) -> List[Tuple[str, List[float]]]:
+                                  bool=True) -> List[Tuple[str,
+                                                           List[float], str]]:
         """
         Generate the sent2vec emoji embeddings from the input file
 
@@ -120,13 +109,15 @@ class ExhaustiveChunkingTranslation:
                                            keep_stop_words)
 
                 # Add each emoji and embedded description to the list
-                emoji_embeddings.append((emoji, self.s2v.embed_sentence(desc)))
+                emoji_embeddings.append((emoji,
+                                         self.s2v.embed_sentence(desc),
+                                         desc))
 
         # Return the embeddings
         return emoji_embeddings
 
     @lru_cache(maxsize=1000)
-    def closest_emoji(self, sent: str) -> Tuple[str, int]:
+    def closest_emoji(self, sent: str) -> Tuple[str, int, str]:
         """
         Get the closest emoji to the given sentence
 
@@ -151,6 +142,7 @@ class ExhaustiveChunkingTranslation:
 
         # The best emoji starts as an empty string placeholder
         best_emoji = ""
+        best_desc = ""
 
         # Loop through the dictionary
         for emoji in self.emoji_embeddings:
@@ -165,9 +157,10 @@ class ExhaustiveChunkingTranslation:
             if curr_cos < lowest_cos:
                 lowest_cos = curr_cos
                 best_emoji = emoji[0]
+                best_desc = emoji[2]
 
         # Return a 2-tuple containing the best emoji and its cosine differnece
-        return best_emoji, lowest_cos
+        return best_emoji, lowest_cos, best_desc
 
     def validate_n_gram(self, n_grams: List[str]) -> bool:
         """
@@ -307,8 +300,9 @@ class ExhaustiveChunkingTranslation:
             # Iterate through each n_gram adding the uncertainty and
             # emoji to the lists
             for n_gram in sent_combo:
-                close_emoji, cos_diff = self.closest_emoji(n_gram)
+                close_emoji, cos_diff, close_desc = self.closest_emoji(n_gram)
                 local_summarization.emojis += close_emoji
+                local_summarization.emojis_n_grams.append(close_desc)
                 local_summarization.uncertainty_scores.append(cos_diff)
 
             local_summarization.n_grams = sent_combo
