@@ -31,12 +31,23 @@ stopwords = set(stopwords.words('english'))
 
 
 class AbstractEmojiTranslator(ABC):
+    s2v = None
+    s2v_file = ""
+
+    @staticmethod
+    def get_s2v(model_file):
+        if AbstractEmojiTranslator.s2v is None:
+            AbstractEmojiTranslator.s2v = sent2vec.Sent2vecModel()
+            AbstractEmojiTranslator.s2v.load_model(model_file)
+            AbstractEmojiTranslator.s2v_file = model_file
+
+        return AbstractEmojiTranslator.s2v
+
     def __init__(self, emoji_data_file: str, s2v_model_file: str,
                  lemma_func: Callable[[str], str]):
         self.emoji_file = emoji_data_file
 
-        self.s2v = sent2vec.Sent2vecModel()
-        self.s2v.load_model(s2v_model_file)
+        self.s2v = AbstractEmojiTranslator.get_s2v(s2v_model_file)
 
         self.lemma_func = lemma_func
 
