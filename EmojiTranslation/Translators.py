@@ -1,28 +1,30 @@
 # Standard library
 from typing import List, Tuple, Callable  # Datatypes for the function typing
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod       # Abstract class helpers
 from string import punctuation            # Set of all punctuation
 from functools import lru_cache           # Annotation for storing func results
 
 
-# Scipy suite
-import numpy as np         # For function annotation
+# Import numpy for some helper functions
+import numpy as np
 
 # NLTK
-from nltk import word_tokenize              # Tokenizing a sentence into words
-# from nltk.stem import WordNetLemmatizer     # Different stemming algorithms
-from nltk import Tree
-from nltk.corpus import stopwords           # Define the set of stopwords
+from nltk import word_tokenize     # Tokenizing a sentence into words
+from nltk import Tree              # Tree like data structure for grammar trees
+from nltk.corpus import stopwords  # Define the set of stopwords
 
+# Sent2vec sentence embedding class
 import sent2vec
-import spacy
+
+# Spacy
+import spacy  # For creating the grammar tree for the POS tagging translator
 
 # Import the result class to hold the emoji results
 from .EmojiSummarizationResult import EmojiSummarizationResult
 
-# from . AbstractEmojiTranslator import AbstractEmojiTranslator
+# Get the cosine function from the utilities class. Would use the one
+# from scipy but it won't install on my machine
 from .utils import cosine
-
 
 # Ignore simple warnings
 import warnings
@@ -31,16 +33,44 @@ stopwords = set(stopwords.words('english'))
 
 
 class AbstractEmojiTranslator(ABC):
+
+    """Abstract class for all Emoji Translation classes to inherit
+    from. This includes an abstract summarize method that MUST
+    be overridden
+
+    Attributes:
+        emoji_embeddings (List[str, List[float], str]): List of embedded
+                                                        emoji descriptions
+        emoji_file (str): Location of the emoji data file
+        lemma_func (Callable[[str], str]): Lemmatization function
+        nlp (Spacy.lang): Spacy NLP object
+        s2v (Sent2vecModel): Sent2Vec model
+        s2v_file (str): Sent2vec model file location
+    """
+
+    # Sent2Vec model singleton class level datamembers
     s2v = None
     s2v_file = ""
 
     @staticmethod
-    def get_s2v(model_file):
+    def get_s2v(model_file: str) -> sent2vec.Sent2vecModel:
+        """Instantiate a s2v model if one doesn't already exist.
+        If one does exist then return the pre-existing model
+
+        Args:
+            model_file (str): File for the model data
+
+        Returns:
+            sent2vec.Sent2vecModel: Sent2vec model
+        """
+        # Check if a model is already instantiated
         if AbstractEmojiTranslator.s2v is None:
+            # If not then create one
             AbstractEmojiTranslator.s2v = sent2vec.Sent2vecModel()
             AbstractEmojiTranslator.s2v.load_model(model_file)
             AbstractEmojiTranslator.s2v_file = model_file
 
+        # Return the current static model
         return AbstractEmojiTranslator.s2v
 
     def __init__(self, emoji_data_file: str, s2v_model_file: str,
