@@ -8,9 +8,6 @@ import numpy as np         # For function annotation
 from nltk import word_tokenize              # Tokenizing a sentence into words
 # from nltk.stem import WordNetLemmatizer     # Different stemming algorithms
 
-# Import sentence vectorizer
-import sent2vec
-
 # Import the result class to hold the emoji results
 from EmojiSummarizationResult import EmojiSummarizationResult
 from AbstractEmojiTranslator import AbstractEmojiTranslator
@@ -23,17 +20,6 @@ warnings.simplefilter('ignore')
 
 
 class ExhaustiveChunkingTranslation(AbstractEmojiTranslator):
-    def __init__(self, emoji_data_file: str, s2v_model_file: str,
-                 lemma_func: Callable[[str], str]):
-        self.emoji_file = emoji_data_file
-
-        self.s2v = sent2vec.Sent2vecModel()
-        print(s2v_model_file)
-        self.s2v.load_model(s2v_model_file)
-
-        self.lemma_func = lemma_func
-
-        self.emoji_embeddings = self.generate_emoji_embeddings()
 
     def combinations_of_sent(self, sent: str) -> List[List[str]]:
         """
@@ -149,7 +135,6 @@ class ExhaustiveChunkingTranslation(AbstractEmojiTranslator):
         # Clean the sentence
         sent = self.clean_sentence(sent, lemma_func=lemma_func,
                                    keep_stop_words=keep_stop_words)
-        print(sent)
 
         # Generate all combinations of sentences
         sent_combos = self.combinations_of_sent(sent)

@@ -5,12 +5,35 @@ from nltk.corpus import stopwords           # Define the set of stopwords
 from nltk import word_tokenize
 from functools import lru_cache           # Annotation for storing func results
 from utils import cosine
+import sent2vec
+import spacy
 
 
 stopwords = set(stopwords.words('english'))
 
 
 class AbstractEmojiTranslator(ABC):
+    def __init__(self, emoji_data_file: str, s2v_model_file: str,
+                 lemma_func: Callable[[str], str]):
+        self.emoji_file = emoji_data_file
+
+        self.s2v = sent2vec.Sent2vecModel()
+        print(s2v_model_file)
+        self.s2v.load_model(s2v_model_file)
+
+        self.lemma_func = lemma_func
+
+        self.emoji_embeddings = self.generate_emoji_embeddings()
+        self.nlp = spacy.load("en")
+
+    def clean_n_gram(n_grams: List[str]) -> bool:
+        """
+        Validate that a given n_gram is good. Good is defined as the series
+        of n-grams contains no n-grams containing only stop words
+        """
+        stopwords = "the and but".split()
+        return list(filter(lambda x: x not in stopwords, n_grams))
+
     def clean_sentence(self, sent: str, lemma_func: Callable[[str], str]=None,
                        keep_stop_words: bool=True) -> str:
         """
