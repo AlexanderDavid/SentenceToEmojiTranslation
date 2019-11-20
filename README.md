@@ -58,7 +58,9 @@ As you can see this is not yet producing optimal summaries. Some work needs to b
 ## Prerequisites
 - [NLTK](https://www.nltk.org/)
 - [sent2vec](https://github.com/epfml/sent2vec)
+- [spacy]
 - [Tabulate](https://pypi.org/project/tabulate/)
 - [Jupyter Notebook](https://jupyter.org/)
 
-
+## Getting off the Ground
+All of the Jupyter Notebooks we did our development in are in the obvious folder. Read through those to get an idea of how the algorithm works internally if you want. The python module that we created is in the EmojiTranslation folder.
