@@ -9,6 +9,7 @@ A naive chunking approach to summarizing a sentence to emoji translation using s
 ## Getting off the Ground
 - This project requires Python 3
 - Install dependencies with `pip install -r requirements.txt`
+- Install [sent2vec](https://github.com/epfml/sent2vec/tree/6b0eddec0c95e6e7f6f06582700305957311bfb9) according to the github repo
 - Download a [sent2vec model](https://github.com/epfml/sent2vec/tree/6b0eddec0c95e6e7f6f06582700305957311bfb9) to the models/directory
 - Download the [emoji2vec dataset](https://github.com/uclnlp/emoji2vec/blob/fd3dcb60a06b530c755ed1f1c8157d505b80e844/data/raw_training_data/emoji_joined.txt) to the data/ directory
 - `cd JupyterNotebooks && jupyter notebook` to start the jupyter notebook server to explore the algorithm
