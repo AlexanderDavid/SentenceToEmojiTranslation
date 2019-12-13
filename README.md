@@ -21,7 +21,7 @@ The `JupyterNotebook`
 The module contains the two separate algorithms in two separate classes. To use them simply import the `Translators` submodule from
 the `EmojiTranslation` module. In that submodule there are two classes of note `ExhaustiveChunkingTranslation` and `PartOfSpeechEmojiTranslator`.
 They both are instantiated with three paramters. An example of use is shown below
-```
+```python
 # Import the translation submodule 
 from EmojiTranslation import Translators
 
