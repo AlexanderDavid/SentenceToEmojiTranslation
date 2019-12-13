@@ -4,7 +4,7 @@ A novel chunking approach to summarizing a sentence to emoji translation using s
 ## Folder Structure
 - `EmojiTranslation` ➡️ Emoji Translation module
 - `JupyterNotebooks` ➡️ Literate programming-esque emoji translation algorithm
-- `plots` ➡️ Plots for the paper
+- `plots`            ➡️ Plots for the paper
 
 ## Getting off the Ground
 - This project requires Python 3
