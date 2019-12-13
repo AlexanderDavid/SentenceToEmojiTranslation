@@ -26,9 +26,9 @@ They both are instantiated with three paramters. An example of use is shown belo
 from EmojiTranslation import Translators
 
 # Paramererize the constructor arguments
-emoji_file = "./data/emoji_joined.txt" # Emoji keyword file from emoji2vec
+emoji_file = "./data/emoji_joined.txt"         # Emoji keyword file from emoji2vec
 sent2vec_model = "../models/wiki_unigrams.bin" # sent2vec model
-nothing_lemma_func = lambda x: x # Lemmatization function that does nothing
+nothing_lemma_func = lambda x: x               # Lemmatization function that does nothing
 
 # Instantiate the exhaustive and part of speech translation algorithms
 exh = Translators.ExhaustiveChunkingTranslation(emoji_file, sent2vec_model, nothing_lemma_func)
