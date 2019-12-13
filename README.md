@@ -1,10 +1,10 @@
-# Sentence to Emoji Translation
-A naive chunking approach to summarizing a sentence to emoji translation using sent2vec and some of emoji2vec's dataset. This is a final senior research project for my undergraduate degree at Clarion University. The paper and explanation of the algorithm can be seen at [TEMPORARY LINK](https://www.authorea.com/users/269084/articles/396929-sentence-to-emoji-translation). 
+# Sentence to Emoji Translation (or 📄🗜➡️😆)
+A novel chunking approach to summarizing a sentence to emoji translation using sent2vec and some of emoji2vec's dataset. This is a final senior research project for my undergraduate degree at Clarion University. The paper and explanation of the algorithm can be seen at [TEMPORARY LINK](https://www.authorea.com/users/269084/articles/396929-sentence-to-emoji-translation). 
 
 ## Folder Structure
-- `EmojiTranslation` -> Emoji Translation module
-- `JupyterNotebooks` -> Literate programming-esque emoji translation algorithm
-- `plots` -> Plots for the paper
+- `EmojiTranslation` ➡️ Emoji Translation module
+- `JupyterNotebooks` ➡️ Literate programming-esque emoji translation algorithm
+- `plots` ➡️ Plots for the paper
 
 ## Getting off the Ground
 - This project requires Python 3
