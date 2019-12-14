@@ -14,8 +14,7 @@ A novel chunking approach to summarizing a sentence to emoji translation using s
 - Download the [emoji2vec dataset](https://github.com/uclnlp/emoji2vec/blob/fd3dcb60a06b530c755ed1f1c8157d505b80e844/data/raw_training_data/emoji_joined.txt) to the `data/` directory
 
 ## Jupyter Notebook
-The `JupyterNotebook` 
-`cd JupyterNotebooks && jupyter notebook` to start the jupyter notebook server to explore the algorithm
+The `JupyterNotebook` directory contains all of the Jupyter Notebooks that were used to develop this algorithm. Most of them are accurately named and a lot of them have a ton of comments and markdown to explain everything. the command `cd JupyterNotebooks && jupyter notebook` starts the jupyter notebook server and allows you to explore the algorithm
 
 ## Module
 The module contains the two separate algorithms in two separate classes. To use them simply import the `Translators` submodule from
