@@ -1,5 +1,5 @@
 # Sentence to Emoji Translation (or 📄🗜➡️😆)
-A novel chunking approach to summarizing a sentence to emoji translation using sent2vec and some of emoji2vec's dataset. This is a final senior research project for my undergraduate degree at Clarion University. The paper and explanation of the algorithm can be seen at [TEMPORARY LINK](https://www.authorea.com/users/269084/articles/396929-sentence-to-emoji-translation). 
+A novel chunking approach to summarizing a sentence to emoji translation using sent2vec and some of emoji2vec's dataset. This is a final senior research project for my undergraduate degree at Clarion University. The paper and explanation of the algorithm can be seen on [my website](https://www.alexday.me/pdf/emoji.pdf). 
 
 ## Folder Structure
 - `EmojiTranslation` ➡️ Emoji Translation module
@@ -37,4 +37,19 @@ pos = Translators.PartOfSpeechEmojiTranslator(emoji_file, sent2vec_model, nothin
 sent = "the dog ran fast"
 print(exh.summarize(sent))
 print(pos.summarize(sent))
+```
+
+## Citation
+If you want to cite this work please use the following bibtex:
+```bibtex
+@inproceedings{day2020confet,
+  title           = {CoNFET: An English Sentence to Emojis Translation
+                  Algorithm},
+  author          = {Alex Day and Chris Mankos and Soo Kim and Jody Strausser},
+  booktitle       = {Proceedings of the 35th Annual Spring Conference of the
+                  Pennsylvania Computer and Information Science Educators},
+  organization    = {Pennsylvania Computer and Information Science Educators},
+  year            = 2020,
+  month           = {April},
+}
 ```
