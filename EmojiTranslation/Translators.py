@@ -82,7 +82,7 @@ class AbstractEmojiTranslator(ABC):
         self.lemma_func = lemma_func
 
         self.emoji_embeddings = self.generate_emoji_embeddings()
-        self.nlp = spacy.load("en")
+        self.nlp = spacy.load("en_core_web_sm")
 
     def clean_n_gram(n_grams: List[str]) -> bool:
         """
